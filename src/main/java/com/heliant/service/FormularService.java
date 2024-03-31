@@ -3,6 +3,8 @@ package com.heliant.service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import com.heliant.model.Formular;
 import com.heliant.model.FormularPopunjen;
 
@@ -29,5 +31,7 @@ public interface FormularService {
 	public void obrisiFormularPopunjenSaId(Long id);
 	
 	List<FormularPopunjen> vratiSvePopunjeneFormulareDanas(LocalDateTime pocetnoVreme, LocalDateTime krajnjeVreme);
+	
+	Page<Formular> pronadjiFormulareSaPaginacijom(int brojStranice, int brojFormularaPoStranici);
 	
 }

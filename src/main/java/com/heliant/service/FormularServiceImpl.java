@@ -7,6 +7,9 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.heliant.model.Formular;
@@ -116,6 +119,12 @@ public class FormularServiceImpl implements FormularService {
 	@Override
 	public List<FormularPopunjen> vratiSvePopunjeneFormulareDanas(LocalDateTime pocetnoVreme, LocalDateTime krajnjeVreme) {
 		return formularPopunjenRepository.findByVremeKreiranjaBetween(pocetnoVreme, krajnjeVreme);
+	}
+
+	@Override
+	public Page<Formular> pronadjiFormulareSaPaginacijom(int brojStranice, int brojFormularaPoStranici) {
+		Pageable pageable = PageRequest.of(brojStranice - 1, brojFormularaPoStranici);
+		return formularRepository.findAll(pageable);
 	}
 	
 }

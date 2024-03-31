@@ -3,6 +3,7 @@ package com.heliant.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,6 +51,17 @@ public class FormularController {
 		formularService.obrisiFormularSaId(formularId);
 		
 		return "Formular uspesno obrisan!";
+	}
+	
+	@GetMapping("/prikaziFormulare/stranica/{brojStranice}")
+	public List<Formular> prikaziFormulareSaPaginacijom(@PathVariable (value = "brojStranice") int brojStranice) {
+		
+		int brojFormularaPoStranici = 5;
+		
+		Page<Formular> page = formularService.pronadjiFormulareSaPaginacijom(brojStranice, brojFormularaPoStranici);
+		List<Formular> listaFormulara = page.getContent();
+		
+		return listaFormulara;
 	}
 
 }
