@@ -10,8 +10,6 @@ public class ApiErrorResponse {
 
     private int code;
     private String opis;
-    private String entitet;
-    private String svojstvoEntiteta;
-    private String narusenaValidacija;
+    private String originalnaPoruka;
 
 }

@@ -52,11 +52,13 @@ public class FormularServiceImpl implements FormularService {
 	@Override
 	public Formular izmeniFormular(Formular formular, Principal principal) {
 		
-		formular.setVremeKreiranja(vratiFormularSaId(formular.getId()).getVremeKreiranja());
+		formular.setVremeKreiranja(vratiFormularSaId(formular.getId()) != null ? vratiFormularSaId(formular.getId()).getVremeKreiranja() : null);
 		
 		Korisnik korisnik = (Korisnik) userDetailsServiceImpl.loadUserByUsername(principal.getName());
 		
-		formular.setKorisnikKreirao(vratiFormularSaId(formular.getId()).getKorisnikKreirao() == null ? korisnik : vratiFormularSaId(formular.getId()).getKorisnikKreirao());
+		formular.setKorisnikKreirao(vratiFormularSaId(formular.getId()) != null ? 
+				(vratiFormularSaId(formular.getId()).getKorisnikKreirao() == null ? korisnik : 
+					vratiFormularSaId(formular.getId()).getKorisnikKreirao()) : null);
 		formular.setKorisnikPoslednjiAzurirao(korisnik);
 		
 		return formularRepository.save(formular);
@@ -103,7 +105,8 @@ public class FormularServiceImpl implements FormularService {
 	@Override
 	public FormularPopunjen izmeniFormularPopunjen(FormularPopunjen formularPopunjen, Principal principal) {
 		
-		formularPopunjen.setVremeKreiranja(vratiFormularPopunjenSaId(formularPopunjen.getId()).getVremeKreiranja());
+		formularPopunjen.setVremeKreiranja(vratiFormularPopunjenSaId(formularPopunjen.getId()) != null ? 
+				vratiFormularPopunjenSaId(formularPopunjen.getId()).getVremeKreiranja() : null);
 		
 		Set<PoljePopunjeno> staraPolja = vratiFormularPopunjenSaId(formularPopunjen.getId()).getPopunjenaPoljaFormulara();
 		
@@ -131,7 +134,9 @@ public class FormularServiceImpl implements FormularService {
 		
 		Korisnik korisnik = (Korisnik) userDetailsServiceImpl.loadUserByUsername(principal.getName());
 		
-		formularPopunjen.setKorisnikKreirao(vratiFormularPopunjenSaId(formularPopunjen.getId()).getKorisnikKreirao() == null ? korisnik : vratiFormularPopunjenSaId(formularPopunjen.getId()).getKorisnikKreirao());
+		formularPopunjen.setKorisnikKreirao(vratiFormularPopunjenSaId(formularPopunjen.getId()) != null ? 
+				(vratiFormularPopunjenSaId(formularPopunjen.getId()).getKorisnikKreirao() == null ? korisnik : 
+					vratiFormularPopunjenSaId(formularPopunjen.getId()).getKorisnikKreirao()) : null);
 		formularPopunjen.setKorisnikPoslednjiAzurirao(korisnik);
 		
 		return formularPopunjenRepository.save(formularPopunjen);

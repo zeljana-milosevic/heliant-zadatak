@@ -41,10 +41,12 @@ public class PoljeServiceImpl implements PoljeService {
 		
 		Korisnik korisnik = (Korisnik) userDetailsServiceImpl.loadUserByUsername(principal.getName());
 		
-		polje.setKorisnikKreirao(vratiPoljeSaId(polje.getId()).getKorisnikKreirao() == null ? korisnik : vratiPoljeSaId(polje.getId()).getKorisnikKreirao());
+		polje.setKorisnikKreirao(vratiPoljeSaId(polje.getId()) != null ? 
+				(vratiPoljeSaId(polje.getId()).getKorisnikKreirao() == null ? korisnik : 
+					vratiPoljeSaId(polje.getId()).getKorisnikKreirao()) : null);
 		polje.setKorisnikPoslednjiAzurirao(korisnik);
 		
-		polje.setVremeKreiranja(vratiPoljeSaId(polje.getId()).getVremeKreiranja());
+		polje.setVremeKreiranja(vratiPoljeSaId(polje.getId()) != null ? vratiPoljeSaId(polje.getId()).getVremeKreiranja() : null);
 		
 		return poljeRepository.save(polje);
 	}
