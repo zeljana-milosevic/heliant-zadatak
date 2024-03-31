@@ -10,9 +10,16 @@
 	http://www.liquibase.org/xml/ns/dbchangelog 
 	http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.23.xsd">
 	
-	<include file="db/changelog/scripts/kreiranje_tabela.xml"/>
-	<include file="db/changelog/scripts/unos_korisnika.xml"/>
-	<include file="db/changelog/scripts/uvodjenje_autentifikacije.xml"/>
-	<include file="db/changelog/scripts/uvodjenje_rola.xml"/>
+	<changeSet author="Zeljana Milosevic" id="20240328">
+	    <sql dbms="mysql">
+	    
+	      ALTER TABLE KORISNIK ADD COLUMN ROLE VARCHAR(255);
+	      
+	      UPDATE KORISNIK SET ROLE = 'ADMIN' WHERE KORISNICKO_IME = 'zeljanaAdmin';
+	      
+	      UPDATE KORISNIK SET ROLE = 'RADNIK' WHERE KORISNICKO_IME = 'zeljanaRadnik';
+		
+	    </sql>
+  	</changeSet>
 	
 </databaseChangeLog>

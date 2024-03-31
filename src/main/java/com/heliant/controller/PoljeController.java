@@ -20,31 +20,31 @@ public class PoljeController {
 	@Autowired
 	private PoljeService poljeService;
 	
-	@GetMapping("/prikaziSvaPolja")
+	@GetMapping("/svi/prikaziSvaPolja")
 	public List<Polje> prikaziSvaPolja() {
 		
 	    return poljeService.prikaziSvaPolja();
 	}
 	
-	@GetMapping("/prikaziSvaPoljaFormulara/{formularId}")
+	@GetMapping("/svi/prikaziSvaPoljaFormulara/{formularId}")
 	public List<Polje> prikaziSvaPolja(@PathVariable("formularId") Long formularId) {
 		
 	    return poljeService.prikaziSvaPoljaFormulara(formularId);
 	}
 	
-	@PostMapping("/sacuvajPolje")
+	@PostMapping("/admin/sacuvajPolje")
 	public Polje sacuvajPolje(@RequestBody Polje polje) {
 		
 		return poljeService.sacuvajPolje(polje);
 	}
 	
-	@PutMapping("/izmeniPolje")
+	@PutMapping("/admin/izmeniPolje")
 	public Polje izmeniPolje(@RequestBody Polje polje) {
 		
 		return poljeService.izmeniPolje(polje);
 	}
 	
-	@DeleteMapping("/obrisiPolje/{poljeId}")
+	@DeleteMapping("/admin/obrisiPolje/{poljeId}")
 	public String obrisiPolje(@PathVariable("poljeId") Long poljeId) {
 		
 		poljeService.obrisiPoljeSaId(poljeId);

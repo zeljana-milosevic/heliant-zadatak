@@ -41,6 +41,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         req->req.requestMatchers("/login/**")
                                 .permitAll()
+                                .requestMatchers("/svi/**").hasAnyAuthority("RADNIK", "ADMIN")
+                                .requestMatchers("/admin/**").hasAuthority("ADMIN")
                                 .anyRequest()
                                 .authenticated()
                 ).userDetailsService(userDetailsServiceImpl)

@@ -20,31 +20,31 @@ public class PopunjavanjeFormularaController {
 	@Autowired
 	private FormularService formularService;
 	
-	@GetMapping("/prikaziSvePopunjeneFormulare")
+	@GetMapping("/svi/prikaziSvePopunjeneFormulare")
 	public List<FormularPopunjen> prikaziSvePopunjeneFormulare() {
 		
 	    return formularService.prikaziSvePopunjeneFormulare();
 	}
 	
-	@GetMapping("/vratiPopunjenFormularSaId/{formularPopunjenId}")
+	@GetMapping("/svi/vratiPopunjenFormularSaId/{formularPopunjenId}")
 	public FormularPopunjen vratiFormularSaId(@PathVariable("formularPopunjenId") Long formularPopunjenId) {
 		
 	    return formularService.vratiFormularPopunjenSaId(formularPopunjenId);
 	}
 	
-	@PostMapping("/sacuvajPopunjenFormular")
+	@PostMapping("/svi/sacuvajPopunjenFormular")
 	public FormularPopunjen sacuvajPopunjenFormular(@RequestBody FormularPopunjen formularPopunjen) {
 		
 		return formularService.sacuvajFormularPopunjen(formularPopunjen);
 	}
 	
-	@PutMapping("/izmeniPopunjenFormular")
+	@PutMapping("/svi/izmeniPopunjenFormular")
 	public FormularPopunjen izmeniPopunjenFormular(@RequestBody FormularPopunjen formularPopunjen) {
 		
 		return formularService.izmeniFormularPopunjen(formularPopunjen);
 	}
 	
-	@DeleteMapping("/obrisiPopunjenFormular/{formularPopunjenId}")
+	@DeleteMapping("/svi/obrisiPopunjenFormular/{formularPopunjenId}")
 	public String obrisiPopunjenFormular(@PathVariable("formularPopunjenId") Long formularPopunjenId) {
 		
 		formularService.obrisiFormularPopunjenSaId(formularPopunjenId);

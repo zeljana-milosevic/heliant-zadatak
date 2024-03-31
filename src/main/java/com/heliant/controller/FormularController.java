@@ -21,31 +21,31 @@ public class FormularController {
 	@Autowired
 	private FormularService formularService;
 	
-	@GetMapping("/prikaziSveFormulare")
+	@GetMapping("/svi/prikaziSveFormulare")
 	public List<Formular> prikaziSveFormulare() {
 		
 	    return formularService.prikaziSveFormulare();
 	}
 	
-	@GetMapping("/vratiFormularSaId/{formularId}")
+	@GetMapping("/svi/vratiFormularSaId/{formularId}")
 	public Formular vratiFormularSaId(@PathVariable("formularId") Long formularId) {
 		
 	    return formularService.vratiFormularSaId(formularId);
 	}
 	
-	@PostMapping("/sacuvajFormular")
+	@PostMapping("/admin/sacuvajFormular")
 	public Formular sacuvajFormular(@RequestBody Formular formular) {
 		
 		return formularService.sacuvajFormular(formular);
 	}
 	
-	@PutMapping("/izmeniFormular")
+	@PutMapping("/admin/izmeniFormular")
 	public Formular izmeniFormular(@RequestBody Formular formular) {
 		
 		return formularService.izmeniFormular(formular);
 	}
 	
-	@DeleteMapping("/obrisiFormular/{formularId}")
+	@DeleteMapping("/admin/obrisiFormular/{formularId}")
 	public String izmeniFormular(@PathVariable("formularId") Long formularId) {
 		
 		formularService.obrisiFormularSaId(formularId);
@@ -53,7 +53,7 @@ public class FormularController {
 		return "Formular uspesno obrisan!";
 	}
 	
-	@GetMapping("/prikaziFormulare/stranica/{brojStranice}")
+	@GetMapping("/svi/prikaziFormulare/stranica/{brojStranice}")
 	public List<Formular> prikaziFormulareSaPaginacijom(@PathVariable (value = "brojStranice") int brojStranice) {
 		
 		int brojFormularaPoStranici = 5;
