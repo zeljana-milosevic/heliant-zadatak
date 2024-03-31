@@ -7,6 +7,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,4 +26,14 @@ public class AbstractConfigurationEntity extends AbstractEntity{
 	@Column(name = "vreme_poslednje_izmene")
 	private LocalDateTime vremePoslednjeIzmene;
 	
+	@PrePersist
+	public void postaviVremeKreiranja() {
+		vremeKreiranja = LocalDateTime.now();
+	}
+	
+	@PreUpdate
+	public void postaviVremePoslednjeIzmeneIUzimStaroVremeKreiranja() {
+		vremeKreiranja = this.getVremeKreiranja();
+		vremePoslednjeIzmene = LocalDateTime.now();
+	}
 }

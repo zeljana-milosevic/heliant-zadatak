@@ -10,7 +10,16 @@
 	http://www.liquibase.org/xml/ns/dbchangelog 
 	http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.23.xsd">
 	
-	<include file="db/changelog/scripts/kreiranje_tabela.xml"/>
-	<include file="db/changelog/scripts/unos_korisnika.xml"/>
+	<changeSet author="Zeljana Milosevic" id="20240328">
+	    <sql dbms="mysql">
+	    
+	    	INSERT INTO KORISNIK (KORISNICKO_IME, LOZINKA, VREME_KREIRANJA, VREME_POSLEDNJE_IZMENE) 
+				VALUES ('zeljanaAdmin', '$2a$12$LUrsgq/9w.1Z0vSqI5S7UuhnVI//MF0gSSK1g2M9nsgVWwvyjN8Aa', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
+				
+			INSERT INTO KORISNIK (KORISNICKO_IME, LOZINKA, VREME_KREIRANJA, VREME_POSLEDNJE_IZMENE) 
+				VALUES ('zeljanaRadnik', '$2a$12$LUrsgq/9w.1Z0vSqI5S7UuhnVI//MF0gSSK1g2M9nsgVWwvyjN8Aa', CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP());
+		
+	    </sql>
+  	</changeSet>
 	
 </databaseChangeLog>

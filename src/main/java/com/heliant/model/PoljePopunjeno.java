@@ -2,6 +2,8 @@ package com.heliant.model;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -17,8 +19,9 @@ import lombok.Setter;
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
 @Entity @Table(name = "polje_popunjeno")
-public class PoljePopunjeno extends AbstractConfigurationEntity {
+public class PoljePopunjeno extends AbstractConfigurationEntity implements Comparable<PoljePopunjeno> {
 
+	@Getter(onMethod = @__( @JsonBackReference))
 	@NotNull
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_formular_popunjen")
@@ -50,6 +53,11 @@ public class PoljePopunjeno extends AbstractConfigurationEntity {
 			return false;
 		PoljePopunjeno other = (PoljePopunjeno) obj;
 		return Objects.equals(this.getPolje().getId(), other.getPolje().getId());
+	}
+
+	@Override
+	public int compareTo(PoljePopunjeno o) {
+		return this.getPolje().getPrikazniRedosled().compareTo(o.getPolje().getPrikazniRedosled());
 	}
 	
 }
