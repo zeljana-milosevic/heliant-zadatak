@@ -10,8 +10,21 @@
 	http://www.liquibase.org/xml/ns/dbchangelog 
 	http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.23.xsd">
 	
-	<include file="db/changelog/scripts/kreiranje_tabela.xml"/>
-	<include file="db/changelog/scripts/unos_korisnika.xml"/>
-	<include file="db/changelog/scripts/uvodjenje_autentifikacije.xml"/>
+	<changeSet author="Zeljana Milosevic" id="20240328">
+	    <sql dbms="mysql">
+	    
+	      CREATE TABLE IF NOT EXISTS TOKEN (
+			ID INT PRIMARY KEY AUTO_INCREMENT,
+			ID_KORISNIK INT,
+			TOKEN VARCHAR(255),
+			IZLOGOVAN BOOLEAN
+		);
+		
+		ALTER TABLE TOKEN
+			ADD CONSTRAINT FK_TOKE_KORI_ID FOREIGN KEY (ID_KORISNIK)
+				REFERENCES KORISNIK(ID);
+		
+	    </sql>
+  	</changeSet>
 	
 </databaseChangeLog>
