@@ -1,4 +1,4 @@
-package com.heliant.exceptions;
+package com.heliant.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

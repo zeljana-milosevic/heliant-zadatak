@@ -10,12 +10,19 @@ import com.heliant.model.AuthenticationResponse;
 import com.heliant.model.Korisnik;
 import com.heliant.service.AuthenticationService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 public class AuthenticationController {
 
 	@Autowired
     private AuthenticationService authService;
 	
+	@Operation(summary = "Logovanje korisnika",
+		       description = "Logovanje korisnika na osnovu korisnickog imena i lozinke. Odgovor je u formi tokena "
+		       		+ "koji se nakon toga koristi za autentifikaciju u ostalim zahtevima.")
+	@Tag(name = "post", description = "POST metode Heliant API")
 	@PostMapping("/login")
     public ResponseEntity<AuthenticationResponse> login(@RequestBody Korisnik korisnik) {
         return ResponseEntity.ok(authService.authenticate(korisnik));
