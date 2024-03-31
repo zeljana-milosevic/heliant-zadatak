@@ -1,5 +1,6 @@
 package com.heliant.service;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -12,9 +13,9 @@ public interface FormularService {
 	
 	public List<Formular> prikaziSveFormulare();
 	
-	public Formular sacuvajFormular(Formular formular);
+	public Formular sacuvajFormular(Formular formular, Principal principal);
 	
-	public Formular izmeniFormular(Formular formular);
+	public Formular izmeniFormular(Formular formular, Principal principal);
 	
 	public Formular vratiFormularSaId(Long id);
 	
@@ -22,9 +23,9 @@ public interface FormularService {
 	
 	public List<FormularPopunjen> prikaziSvePopunjeneFormulare();
 	
-	public FormularPopunjen sacuvajFormularPopunjen(FormularPopunjen formularPopunjen);
+	public FormularPopunjen sacuvajFormularPopunjen(FormularPopunjen formularPopunjen, Principal principal);
 	
-	public FormularPopunjen izmeniFormularPopunjen(FormularPopunjen formularPopunjen);
+	public FormularPopunjen izmeniFormularPopunjen(FormularPopunjen formularPopunjen, Principal principal);
 	
 	public FormularPopunjen vratiFormularPopunjenSaId(Long id);
 	

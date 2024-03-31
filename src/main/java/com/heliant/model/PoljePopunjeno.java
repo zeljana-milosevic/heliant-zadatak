@@ -38,6 +38,14 @@ public class PoljePopunjeno extends AbstractConfigurationEntity implements Compa
 	@Column(name = "vrednost_broj")
 	private Double vrednostBroj;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_korisnik_kreirao")
+	private Korisnik korisnikKreirao;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_korisnik_poslednji_azurirao")
+	private Korisnik korisnikPoslednjiAzurirao;
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(this.getPolje().getId());

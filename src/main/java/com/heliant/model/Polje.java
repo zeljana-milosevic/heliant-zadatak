@@ -41,6 +41,14 @@ public class Polje extends AbstractConfigurationEntity implements Comparable<Pol
 	@Column(name = "tip")
 	private Tip tip;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_korisnik_kreirao")
+	private Korisnik korisnikKreirao;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_korisnik_poslednji_azurirao")
+	private Korisnik korisnikPoslednjiAzurirao;
+	
 	@Override
 	public int compareTo(Polje o) {
 		return this.getPrikazniRedosled().compareTo(o.getPrikazniRedosled());

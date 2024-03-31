@@ -1,0 +1,67 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" 
+	xmlns:pro="http://www.liquibase.org/xml/ns/pro" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext 
+	http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd 
+	http://www.liquibase.org/xml/ns/pro 
+	http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.23.xsd 
+	http://www.liquibase.org/xml/ns/dbchangelog 
+	http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.23.xsd">
+	
+	<changeSet author="Zeljana Milosevic" id="20240328">
+	    <sql dbms="mysql">
+	    
+	      	ALTER TABLE FORMULAR ADD COLUMN ID_KORISNIK_KREIRAO INT;
+	    	
+	    	ALTER TABLE FORMULAR ADD COLUMN ID_KORISNIK_POSLEDNJI_AZURIRAO INT;
+	    	
+	    	ALTER TABLE FORMULAR
+				ADD CONSTRAINT FK_FORM_KOKR_ID FOREIGN KEY (ID_KORISNIK_KREIRAO)
+					REFERENCES KORISNIK(ID);
+					
+			ALTER TABLE FORMULAR
+				ADD CONSTRAINT FK_FORM_KOAZ_ID FOREIGN KEY (ID_KORISNIK_POSLEDNJI_AZURIRAO)
+					REFERENCES KORISNIK(ID);
+					
+			ALTER TABLE POLJE ADD COLUMN ID_KORISNIK_KREIRAO INT;
+	    	
+	    	ALTER TABLE POLJE ADD COLUMN ID_KORISNIK_POSLEDNJI_AZURIRAO INT;
+	    	
+	    	ALTER TABLE POLJE
+				ADD CONSTRAINT FK_POLJ_KOKR_ID FOREIGN KEY (ID_KORISNIK_KREIRAO)
+					REFERENCES KORISNIK(ID);
+					
+			ALTER TABLE POLJE
+				ADD CONSTRAINT FK_POLJ_KOAZ_ID FOREIGN KEY (ID_KORISNIK_POSLEDNJI_AZURIRAO)
+					REFERENCES KORISNIK(ID);
+					
+			ALTER TABLE FORMULAR_POPUNJEN ADD COLUMN ID_KORISNIK_KREIRAO INT;
+	    	
+	    	ALTER TABLE FORMULAR_POPUNJEN ADD COLUMN ID_KORISNIK_POSLEDNJI_AZURIRAO INT;
+	    	
+	    	ALTER TABLE FORMULAR_POPUNJEN
+				ADD CONSTRAINT FK_FOPO_KOKR_ID FOREIGN KEY (ID_KORISNIK_KREIRAO)
+					REFERENCES KORISNIK(ID);
+					
+			ALTER TABLE FORMULAR_POPUNJEN
+				ADD CONSTRAINT FK_FOPO_KOAZ_ID FOREIGN KEY (ID_KORISNIK_POSLEDNJI_AZURIRAO)
+					REFERENCES KORISNIK(ID);
+					
+			ALTER TABLE POLJE_POPUNJENO ADD COLUMN ID_KORISNIK_KREIRAO INT;
+	    	
+	    	ALTER TABLE POLJE_POPUNJENO ADD COLUMN ID_KORISNIK_POSLEDNJI_AZURIRAO INT;
+	    	
+	    	ALTER TABLE POLJE_POPUNJENO
+				ADD CONSTRAINT FK_POPO_KOKR_ID FOREIGN KEY (ID_KORISNIK_KREIRAO)
+					REFERENCES KORISNIK(ID);
+					
+			ALTER TABLE POLJE_POPUNJENO
+				ADD CONSTRAINT FK_POPO_KOAZ_ID FOREIGN KEY (ID_KORISNIK_POSLEDNJI_AZURIRAO)
+					REFERENCES KORISNIK(ID);
+		
+	    </sql>
+  	</changeSet>
+	
+</databaseChangeLog>

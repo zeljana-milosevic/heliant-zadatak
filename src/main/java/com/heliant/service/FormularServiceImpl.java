@@ -1,5 +1,6 @@
 package com.heliant.service;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.heliant.model.Formular;
 import com.heliant.model.FormularPopunjen;
+import com.heliant.model.Korisnik;
 import com.heliant.model.Polje;
 import com.heliant.model.PoljePopunjeno;
 import com.heliant.repository.FormularPopunjenRepository;
@@ -28,21 +30,34 @@ public class FormularServiceImpl implements FormularService {
 	@Autowired
 	private FormularPopunjenRepository formularPopunjenRepository;
 	
+	@Autowired
+	private UserDetailsServiceImpl userDetailsServiceImpl;
+	
 	@Override
 	public List<Formular> prikaziSveFormulare() {
 		return formularRepository.findAll();
 	}
 
 	@Override
-	public Formular sacuvajFormular(Formular formular) {
+	public Formular sacuvajFormular(Formular formular, Principal principal) {
+		
+		Korisnik korisnik = (Korisnik) userDetailsServiceImpl.loadUserByUsername(principal.getName());
+		
+		formular.setKorisnikKreirao(korisnik);
+		formular.setKorisnikPoslednjiAzurirao(korisnik);
 		
 		return formularRepository.save(formular);
 	}
 	
 	@Override
-	public Formular izmeniFormular(Formular formular) {
+	public Formular izmeniFormular(Formular formular, Principal principal) {
 		
 		formular.setVremeKreiranja(vratiFormularSaId(formular.getId()).getVremeKreiranja());
+		
+		Korisnik korisnik = (Korisnik) userDetailsServiceImpl.loadUserByUsername(principal.getName());
+		
+		formular.setKorisnikKreirao(vratiFormularSaId(formular.getId()).getKorisnikKreirao() == null ? korisnik : vratiFormularSaId(formular.getId()).getKorisnikKreirao());
+		formular.setKorisnikPoslednjiAzurirao(korisnik);
 		
 		return formularRepository.save(formular);
 	}
@@ -70,13 +85,23 @@ public class FormularServiceImpl implements FormularService {
 	}
 
 	@Override
-	public FormularPopunjen sacuvajFormularPopunjen(FormularPopunjen formularPopunjen) {
+	public FormularPopunjen sacuvajFormularPopunjen(FormularPopunjen formularPopunjen, Principal principal) {
+		
+		Korisnik korisnik = (Korisnik) userDetailsServiceImpl.loadUserByUsername(principal.getName());
+		
+		formularPopunjen.setKorisnikKreirao(korisnik);
+		formularPopunjen.setKorisnikPoslednjiAzurirao(korisnik);
+		
+		for (PoljePopunjeno popunjenoPolje : formularPopunjen.getPopunjenaPoljaFormulara()) {
+			popunjenoPolje.setKorisnikKreirao(korisnik);
+			popunjenoPolje.setKorisnikPoslednjiAzurirao(korisnik);
+		}
 		
 		return formularPopunjenRepository.save(formularPopunjen);
 	}
 	
 	@Override
-	public FormularPopunjen izmeniFormularPopunjen(FormularPopunjen formularPopunjen) {
+	public FormularPopunjen izmeniFormularPopunjen(FormularPopunjen formularPopunjen, Principal principal) {
 		
 		formularPopunjen.setVremeKreiranja(vratiFormularPopunjenSaId(formularPopunjen.getId()).getVremeKreiranja());
 		
@@ -85,6 +110,15 @@ public class FormularServiceImpl implements FormularService {
 		if (!formularPopunjen.getPopunjenaPoljaFormulara().isEmpty()) {
 			for (PoljePopunjeno staroPolje : staraPolja) {
 				for (PoljePopunjeno novoPolje : formularPopunjen.getPopunjenaPoljaFormulara()) {
+					
+					Korisnik korisnik = (Korisnik) userDetailsServiceImpl.loadUserByUsername(principal.getName());
+					
+					if ((staroPolje.getPolje().getId().equals(novoPolje.getPolje().getId()) && staroPolje.getVrednostTekst() != null && !staroPolje.getVrednostTekst().equals(novoPolje.getVrednostTekst())) ||
+							(staroPolje.getPolje().getId().equals(novoPolje.getPolje().getId()) && staroPolje.getVrednostBroj() != null && !staroPolje.getVrednostBroj().equals(novoPolje.getVrednostBroj()))) {
+						staroPolje.setKorisnikKreirao(staroPolje.getKorisnikKreirao() == null ? korisnik : staroPolje.getKorisnikKreirao());
+						staroPolje.setKorisnikPoslednjiAzurirao(korisnik);
+					}
+					
 					if (staroPolje.getPolje().getId().equals(novoPolje.getPolje().getId())) {
 						staroPolje.setVrednostTekst(novoPolje.getVrednostTekst());
 						staroPolje.setVrednostBroj(novoPolje.getVrednostBroj());
@@ -94,6 +128,11 @@ public class FormularServiceImpl implements FormularService {
 		}
 		
 		formularPopunjen.setPopunjenaPoljaFormulara(staraPolja);
+		
+		Korisnik korisnik = (Korisnik) userDetailsServiceImpl.loadUserByUsername(principal.getName());
+		
+		formularPopunjen.setKorisnikKreirao(vratiFormularPopunjenSaId(formularPopunjen.getId()).getKorisnikKreirao() == null ? korisnik : vratiFormularPopunjenSaId(formularPopunjen.getId()).getKorisnikKreirao());
+		formularPopunjen.setKorisnikPoslednjiAzurirao(korisnik);
 		
 		return formularPopunjenRepository.save(formularPopunjen);
 	}

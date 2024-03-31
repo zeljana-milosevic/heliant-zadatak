@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.heliant.enums.Role;
 
 import jakarta.persistence.Column;
@@ -40,6 +41,7 @@ public class Korisnik extends AbstractConfigurationEntity implements UserDetails
 	@Column(name = "role")
 	private Role role;
 	
+	@Getter(onMethod = @__( @JsonManagedReference))
 	@OneToMany(mappedBy = "korisnik")
 	private List<Token> tokens;
 

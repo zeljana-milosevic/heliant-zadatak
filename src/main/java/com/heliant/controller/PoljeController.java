@@ -1,5 +1,6 @@
 package com.heliant.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,15 +34,15 @@ public class PoljeController {
 	}
 	
 	@PostMapping("/admin/sacuvajPolje")
-	public Polje sacuvajPolje(@RequestBody Polje polje) {
+	public Polje sacuvajPolje(@RequestBody Polje polje, Principal principal) {
 		
-		return poljeService.sacuvajPolje(polje);
+		return poljeService.sacuvajPolje(polje, principal);
 	}
 	
 	@PutMapping("/admin/izmeniPolje")
-	public Polje izmeniPolje(@RequestBody Polje polje) {
+	public Polje izmeniPolje(@RequestBody Polje polje, Principal principal) {
 		
-		return poljeService.izmeniPolje(polje);
+		return poljeService.izmeniPolje(polje, principal);
 	}
 	
 	@DeleteMapping("/admin/obrisiPolje/{poljeId}")

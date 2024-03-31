@@ -1,5 +1,6 @@
 package com.heliant.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,15 +35,15 @@ public class FormularController {
 	}
 	
 	@PostMapping("/admin/sacuvajFormular")
-	public Formular sacuvajFormular(@RequestBody Formular formular) {
+	public Formular sacuvajFormular(@RequestBody Formular formular, Principal principal) {
 		
-		return formularService.sacuvajFormular(formular);
+		return formularService.sacuvajFormular(formular, principal);
 	}
 	
 	@PutMapping("/admin/izmeniFormular")
-	public Formular izmeniFormular(@RequestBody Formular formular) {
+	public Formular izmeniFormular(@RequestBody Formular formular, Principal principal) {
 		
-		return formularService.izmeniFormular(formular);
+		return formularService.izmeniFormular(formular, principal);
 	}
 	
 	@DeleteMapping("/admin/obrisiFormular/{formularId}")

@@ -1,5 +1,6 @@
 package com.heliant.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,15 +34,15 @@ public class PopunjavanjeFormularaController {
 	}
 	
 	@PostMapping("/svi/sacuvajPopunjenFormular")
-	public FormularPopunjen sacuvajPopunjenFormular(@RequestBody FormularPopunjen formularPopunjen) {
+	public FormularPopunjen sacuvajPopunjenFormular(@RequestBody FormularPopunjen formularPopunjen, Principal principal) {
 		
-		return formularService.sacuvajFormularPopunjen(formularPopunjen);
+		return formularService.sacuvajFormularPopunjen(formularPopunjen, principal);
 	}
 	
 	@PutMapping("/svi/izmeniPopunjenFormular")
-	public FormularPopunjen izmeniPopunjenFormular(@RequestBody FormularPopunjen formularPopunjen) {
+	public FormularPopunjen izmeniPopunjenFormular(@RequestBody FormularPopunjen formularPopunjen, Principal principal) {
 		
-		return formularService.izmeniFormularPopunjen(formularPopunjen);
+		return formularService.izmeniFormularPopunjen(formularPopunjen, principal);
 	}
 	
 	@DeleteMapping("/svi/obrisiPopunjenFormular/{formularPopunjenId}")

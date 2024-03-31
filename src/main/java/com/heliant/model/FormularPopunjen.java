@@ -32,4 +32,12 @@ public class FormularPopunjen extends AbstractConfigurationEntity {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "formularPopunjen", cascade = CascadeType.ALL)
 	private Set<PoljePopunjeno> popunjenaPoljaFormulara = new HashSet<>();
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_korisnik_kreirao")
+	private Korisnik korisnikKreirao;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "id_korisnik_poslednji_azurirao")
+	private Korisnik korisnikPoslednjiAzurirao;
+	
 }

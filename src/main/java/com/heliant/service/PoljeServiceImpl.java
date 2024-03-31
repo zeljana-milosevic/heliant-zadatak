@@ -1,11 +1,13 @@
 package com.heliant.service;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.heliant.model.Korisnik;
 import com.heliant.model.Polje;
 import com.heliant.repository.PoljeRepository;
 
@@ -15,18 +17,32 @@ public class PoljeServiceImpl implements PoljeService {
 	@Autowired
 	private PoljeRepository poljeRepository;
 	
+	@Autowired
+	private UserDetailsServiceImpl userDetailsServiceImpl;
+	
 	@Override
 	public List<Polje> prikaziSvaPolja() {
 		return poljeRepository.findAll();
 	}
 
 	@Override
-	public Polje sacuvajPolje(Polje polje) {
+	public Polje sacuvajPolje(Polje polje, Principal principal) {
+		
+		Korisnik korisnik = (Korisnik) userDetailsServiceImpl.loadUserByUsername(principal.getName());
+		
+		polje.setKorisnikKreirao(korisnik);
+		polje.setKorisnikPoslednjiAzurirao(korisnik);
+		
 		return poljeRepository.save(polje);
 	}
 	
 	@Override
-	public Polje izmeniPolje(Polje polje) {
+	public Polje izmeniPolje(Polje polje, Principal principal) {
+		
+		Korisnik korisnik = (Korisnik) userDetailsServiceImpl.loadUserByUsername(principal.getName());
+		
+		polje.setKorisnikKreirao(vratiPoljeSaId(polje.getId()).getKorisnikKreirao() == null ? korisnik : vratiPoljeSaId(polje.getId()).getKorisnikKreirao());
+		polje.setKorisnikPoslednjiAzurirao(korisnik);
 		
 		polje.setVremeKreiranja(vratiPoljeSaId(polje.getId()).getVremeKreiranja());
 		

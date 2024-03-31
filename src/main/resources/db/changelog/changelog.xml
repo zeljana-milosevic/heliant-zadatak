@@ -14,5 +14,6 @@
 	<include file="db/changelog/scripts/unos_korisnika.xml"/>
 	<include file="db/changelog/scripts/uvodjenje_autentifikacije.xml"/>
 	<include file="db/changelog/scripts/uvodjenje_rola.xml"/>
+	<include file="db/changelog/scripts/uvodjenje_korisnika_za_entitete.xml"/>
 	
 </databaseChangeLog>
