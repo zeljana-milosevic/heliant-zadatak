@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.heliant.model.Polje;
 import com.heliant.service.PoljeService;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class PoljeController {
 	
@@ -34,13 +36,13 @@ public class PoljeController {
 	}
 	
 	@PostMapping("/admin/sacuvajPolje")
-	public Polje sacuvajPolje(@RequestBody Polje polje, Principal principal) {
+	public Polje sacuvajPolje(@Valid @RequestBody Polje polje, Principal principal) {
 		
 		return poljeService.sacuvajPolje(polje, principal);
 	}
 	
 	@PutMapping("/admin/izmeniPolje")
-	public Polje izmeniPolje(@RequestBody Polje polje, Principal principal) {
+	public Polje izmeniPolje(@Valid @RequestBody Polje polje, Principal principal) {
 		
 		return poljeService.izmeniPolje(polje, principal);
 	}

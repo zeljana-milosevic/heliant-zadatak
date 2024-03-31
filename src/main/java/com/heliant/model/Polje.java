@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,8 @@ import lombok.Setter;
 
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
-@Entity @Table(name = "polje")
+@Entity @Table(name = "polje", uniqueConstraints = {@UniqueConstraint(columnNames={"ID_FORMULAR", "PRIKAZNI_REDOSLED"}),
+		@UniqueConstraint(columnNames={"ID_FORMULAR", "NAZIV"})})
 public class Polje extends AbstractConfigurationEntity implements Comparable<Polje> {
 
 	@Getter(onMethod = @__( @JsonBackReference))

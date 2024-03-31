@@ -1,0 +1,35 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" 
+	xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" 
+	xmlns:pro="http://www.liquibase.org/xml/ns/pro" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext 
+	http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd 
+	http://www.liquibase.org/xml/ns/pro 
+	http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.23.xsd 
+	http://www.liquibase.org/xml/ns/dbchangelog 
+	http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.23.xsd">
+	
+	<changeSet author="Zeljana Milosevic" id="20240328">
+	    <sql dbms="mysql">
+	    
+	      ALTER TABLE KORISNIK MODIFY VREME_KREIRANJA TIMESTAMP;
+	      
+	      ALTER TABLE FORMULAR MODIFY VREME_KREIRANJA TIMESTAMP;
+	      
+	      ALTER TABLE POLJE MODIFY VREME_KREIRANJA TIMESTAMP;
+	      
+	      ALTER TABLE FORMULAR_POPUNJEN MODIFY VREME_KREIRANJA TIMESTAMP;
+	      
+	      ALTER TABLE POLJE_POPUNJENO MODIFY VREME_KREIRANJA TIMESTAMP;
+	      
+	      ALTER TABLE FORMULAR MODIFY NAZIV VARCHAR(255) UNIQUE;
+	      
+	      ALTER TABLE POLJE ADD CONSTRAINT IF NOT EUNIQUE_ID_FORMULAR_NAZIV UNIQUE (ID_FORMULAR, NAZIV);
+	      
+	      ALTER TABLE POLJE ADD CONSTRAINT UNIQUE_ID_FORMULAR_PRIKAZNI_REDOSLED UNIQUE (ID_FORMULAR, PRIKAZNI_REDOSLED);
+		
+	    </sql>
+  	</changeSet>
+	
+</databaseChangeLog>

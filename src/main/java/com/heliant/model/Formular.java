@@ -13,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,7 +22,7 @@ import lombok.Setter;
 
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
-@Entity @Table(name = "formular")
+@Entity @Table(name = "formular", uniqueConstraints = @UniqueConstraint(columnNames={"NAZIV"}))
 public class Formular extends AbstractConfigurationEntity {
 	
 	@NotNull

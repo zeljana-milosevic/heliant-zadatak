@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.heliant.model.FormularPopunjen;
 import com.heliant.service.FormularService;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class PopunjavanjeFormularaController {
 	
@@ -34,13 +36,13 @@ public class PopunjavanjeFormularaController {
 	}
 	
 	@PostMapping("/svi/sacuvajPopunjenFormular")
-	public FormularPopunjen sacuvajPopunjenFormular(@RequestBody FormularPopunjen formularPopunjen, Principal principal) {
+	public FormularPopunjen sacuvajPopunjenFormular(@Valid @RequestBody FormularPopunjen formularPopunjen, Principal principal) {
 		
 		return formularService.sacuvajFormularPopunjen(formularPopunjen, principal);
 	}
 	
 	@PutMapping("/svi/izmeniPopunjenFormular")
-	public FormularPopunjen izmeniPopunjenFormular(@RequestBody FormularPopunjen formularPopunjen, Principal principal) {
+	public FormularPopunjen izmeniPopunjenFormular(@Valid @RequestBody FormularPopunjen formularPopunjen, Principal principal) {
 		
 		return formularService.izmeniFormularPopunjen(formularPopunjen, principal);
 	}

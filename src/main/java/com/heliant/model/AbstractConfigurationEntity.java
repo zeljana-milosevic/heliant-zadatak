@@ -9,7 +9,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,7 +16,6 @@ import lombok.Setter;
 @MappedSuperclass
 public class AbstractConfigurationEntity extends AbstractEntity{
 	
-	@NotNull
 	@CreationTimestamp
 	@Column(name = "vreme_kreiranja", updatable = false)
 	private LocalDateTime vremeKreiranja;

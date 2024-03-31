@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.heliant.model.Formular;
 import com.heliant.service.FormularService;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class FormularController {
 	
@@ -35,13 +37,13 @@ public class FormularController {
 	}
 	
 	@PostMapping("/admin/sacuvajFormular")
-	public Formular sacuvajFormular(@RequestBody Formular formular, Principal principal) {
+	public Formular sacuvajFormular(@Valid @RequestBody Formular formular, Principal principal) {
 		
 		return formularService.sacuvajFormular(formular, principal);
 	}
 	
 	@PutMapping("/admin/izmeniFormular")
-	public Formular izmeniFormular(@RequestBody Formular formular, Principal principal) {
+	public Formular izmeniFormular(@Valid @RequestBody Formular formular, Principal principal) {
 		
 		return formularService.izmeniFormular(formular, principal);
 	}
