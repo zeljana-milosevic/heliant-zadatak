@@ -1,5 +1,6 @@
 package com.heliant.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -110,6 +111,11 @@ public class FormularServiceImpl implements FormularService {
 	@Override
 	public void obrisiFormularPopunjenSaId(Long id) {
 		formularPopunjenRepository.deleteById(id);
+	}
+	
+	@Override
+	public List<FormularPopunjen> vratiSvePopunjeneFormulareDanas(LocalDateTime pocetnoVreme, LocalDateTime krajnjeVreme) {
+		return formularPopunjenRepository.findByVremeKreiranjaBetween(pocetnoVreme, krajnjeVreme);
 	}
 	
 }

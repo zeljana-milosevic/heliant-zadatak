@@ -1,5 +1,6 @@
 package com.heliant.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.heliant.model.Formular;
@@ -26,5 +27,7 @@ public interface FormularService {
 	public FormularPopunjen vratiFormularPopunjenSaId(Long id);
 	
 	public void obrisiFormularPopunjenSaId(Long id);
+	
+	List<FormularPopunjen> vratiSvePopunjeneFormulareDanas(LocalDateTime pocetnoVreme, LocalDateTime krajnjeVreme);
 	
 }
